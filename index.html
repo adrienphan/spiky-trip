@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Spiky trip</h1>
+        <!-- <div class="palette">
+            <div class="color"
+            >#8396C0</div>
+            <div class="color"
+            >#B6C0D9</div>
+            <div class="color"
+            >#DACFC9</div>
+            <div class="color"
+            >#DB7879</div>
+            <div class="color"
+            >#F1A9A5</div>
+        </div> -->
+        <nav>
+            <ul>
+                <li id="category1" class="category">Sacs</li>
+                <li id="category2" class="category">Valises</li>
+                <li id="category3" class="category">Cactus</li>
+            </ul>
+            <button id="cartBtn"><img src="./src/caddie.png" alt=""></button>
+        </nav>
+    </header>
+    <main>
+        <div id="articles-container">
+
+        </div>
+    </main>
+    <!-- Cart Modal -->
+    <div id="myCart" class="cart">
+        <div class="modal-content">
+            <span id="closeModal">&times;</span>
+            <h2 class="modal-title">Panier</h2>
+            <div id="cart-articles">
+                
+            </div>
+            <div id="total-container">
+                <p>Total : </p>
+                <p id="total"></p>
+            </div>
+            <div class="pay-button-container">
+                <button class="pay-button">Payer</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

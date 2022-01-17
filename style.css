@@ -1,0 +1,273 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+/* reset end */
+/* fonts */
+@font-face {
+    font-family: Arcane nine;
+    src: url("./src/Arcane\ Nine.otf");
+}
+@font-face {
+    font-family: Arthead;
+    src: url("./src/Arthead-Regular\ FREE.otf");
+}
+/* ********** palette ********** */
+/* ********** style ********** */
+body{
+    background-color: #F1A9A5;
+    color: #fff;
+    font-family: Arcane nine;
+}
+/* header */
+h1 {
+    text-align: center;
+    background-color: #8396C0;
+    color: #fff;
+    font-size: 4rem;
+    padding: 1rem;
+    font-family: Arthead, 'Times New Roman', serif;
+}
+nav {
+    width: min(800px, 80vw);
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: #F1A9A5;
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+}
+nav ul {
+    display: flex;
+    justify-content: space-around;
+}
+.category {
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #fff;
+}
+.current {
+    border-bottom: none;
+}
+#cartBtn {
+    width: 3rem;
+    height: 2rem;
+    background-color: #F1A9A5;
+    border: 1px solid #fff;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+}
+#cartBtn img{
+    width: 1.8rem;
+    height: 1.8rem;
+    filter: invert(100%);
+}
+main{
+    width: min(800px, 80%);
+    margin-inline: auto;
+}
+/* articles container */
+#articles-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-size: min(1rem, 4vw);
+}
+/* article card */
+.article-card {
+    width: min(200px, 80vw);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    margin: 1rem;
+}
+.article-image {
+    width: min(200px, 80vw);
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 1px solid #fff;
+    background-color: #DB7879;
+    border-radius: 5px 5px 0 0;
+
+}
+.card-info {
+    height: 5rem;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #DB7879;
+    border-radius: 0 0 5px 5px;
+}
+.name-price, .ref-add{
+    display: flex;
+    justify-content: space-between;
+}
+.ref {
+    font-size: .7rem;
+    line-height: 2rem;
+    color: #F1A9A5;
+}
+.addButton {
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    color: #8396C0;
+    font-family: Arcane nine;
+    cursor: pointer;
+}
+/* Modal Cart */
+#myCart {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #00000075;
+}
+.modal-content {
+    background-color: #8396C0;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: min(500px, 80%); 
+    border-radius: 1rem;
+  }
+  #closeModal {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  h2 {
+      font-size: 2rem;
+  }
+  #closeModal:hover,
+  #closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* cart */
+  .modal-title {
+      margin: 2rem auto;
+  }
+  .cart-article {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid #B6C0D9;
+  }
+  .cart-article-delete {
+    font-size: 2rem;
+    line-height: 1rem;
+    margin-right: 1rem;
+  }
+  .cart-article-delete:hover {
+      cursor: pointer;
+      color: red;
+  }
+  .cart-article-name {
+      width: 20rem;
+  }
+  .quantity-container {
+      display: flex;
+      width: 10rem;
+  }
+  .numberInCart {
+      width: 5rem;
+  }
+  .cart-article-price {
+      width: 10rem;
+  }
+  .quantity-container p {
+      width: 3rem;
+      text-align: center;
+      line-height: 1.5rem;
+  }
+  .cart-article-price {
+      text-align: end;
+  }
+  .minusInCart, .plusInCart {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: none;
+      border-radius: 50%;
+      background-color: #fff;
+      color: #8396C0;
+      font-family: Arcane nine;
+      font-weight: bold;
+      font-size: 2rem;
+      line-height: 1rem;
+  }
+  #total-container {
+      margin: 1rem;
+  }
+  .pay-button-container {
+      display: flex;
+      justify-content: flex-end;
+  }
+  .pay-button {
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    color: #8396C0;
+    font-family: Arcane nine;
+    cursor: pointer;
+  }
