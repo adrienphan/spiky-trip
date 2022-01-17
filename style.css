@@ -89,8 +89,13 @@ nav ul {
     display: flex;
     justify-content: space-around;
 }
+.white-separator {
+    width: 100%;
+    height: 1rem;
+    background-color: #fff;
+}
 .category {
-    width: 6rem;
+    width: min(6rem, 20vw);
     height: 2rem;
     line-height: 2rem;
     text-align: center;

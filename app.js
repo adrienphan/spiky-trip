@@ -33,25 +33,9 @@ class Product{
     }
 }
 //Products list : Array
-const productList = {
-    category1 : [
-        new Product("Sac de baroudeur","./src/image01.jpg", "description", 100, "120.00", "Sacs"),
-        new Product("Sac Ado","./src/image02.jpg", "description", 101, "25.00", "Sacs"),
-        new Product("Sac Mode","./src/image03.jpg", "description", 102, "120.00", "Sacs")
-    ],
-    category2 : [
-        new Product("Valise 'Vernis à ongles'","./src/image04.jpg", "description", 200, "75.00", "Valises"),
-        new Product("Valise Vintage","./src/image05.jpg", "description", 201, "199.99", "Valises"),
-        new Product("Valise perdue","./src/image06.jpg", "description", 202, "1.00", "Valises")
-    ],
-    category3 : [
-        new Product("Cactus 'L'Original'","./src/image07.jpg", "description", 300, "150.00", "Cactus"),
-        new Product("Cactus 'Boule'","./src/image08.jpg", "description", 301, "12.00", "Cactus"),
-        new Product("Cactus de Tennis","./src/image09.jpg", "description", 302, "150.00", "Cactus")
-    ]
-};
+const productList = readLocalStorage("spikyArticles");
 //cart Array : contains objects {product : product, quantity : number of the product}
-let cart = [];
+let cart = readLocalStorage("cart");
 let total;
 /* |**************************|
    |         Elements         |
@@ -71,7 +55,6 @@ const totalElement = document.getElementById("total");
 for (const category of categoryList) {
     //removes border-bottom on selected category
     category.addEventListener("click", ()=>{
-        console.log("classes");
         categoryList.forEach(element => {
             element.classList.remove("current");
         });
@@ -108,6 +91,12 @@ document.addEventListener("click", (e)=>{
 //Call AddToCart when clicking the Add to Cart button
 document.addEventListener("click", (e)=>{
     if(e.target.className == "addButton") {
+        e.target.style.backgroundColor = "#8396C0";
+        e.target.style.color = "#fff"
+        setTimeout(() => {
+            e.target.style.backgroundColor = "#fff";
+            e.target.style.color = "#8396C0"
+        }, 200);
         AddToCart(e.target.id.substring(4));
     }
 });
@@ -161,6 +150,7 @@ function AddToCart(itemReference){
         product : productList[itemCategory][itemReference.slice(2)],
         quantity : 1
     });
+    
 }
 //Fill the Cart Modal with the necessary info
 function DisplayCart(){
@@ -184,6 +174,7 @@ function DisplayCart(){
 
         // numberTarget.innerHTML = element.quantity;
     });
+    addToLocalStorage(cart, "cart");
 }
 function IncreaseQuantity(ref){
     let productToIncrement = cart.find(obj => {
@@ -207,30 +198,37 @@ function DeleteArticleFromCart(ref){
         cart.splice(cart.findIndex(element => element == productToDelete),1);
         DisplayCart();
 }
-function FadeIn(element){
-    element.style.display = block;
-    let opacity = 0.1;
-    let timer = setInterval(()=>{
-        if(opacity >= 1){
-            clearInterval(timer);
-        }
-        element.style.opacity = opacity;
-        element.style.filter = "alpha(opacity=" + op*100 + ")";
-        op += op*0.1
-    }, 50);
+function addToLocalStorage(data, emplacement){
+    let toAdd = JSON.stringify(data);
+    localStorage.setItem(emplacement, toAdd);
 }
-function FadeOut(element){
-    let opacity = 1;
-    let timer = setInterval(()=>{
-        if(opacity <= 0.1){
-            clearInterval(timer);
-            element.style.display = none;
-        }
-        element.style.opacity = opacity;
-        element.style.filter = "alpha(opacity=" + op*100 + ")";
-        op -= op*0.1
-    }, 50);
+function readLocalStorage(emplacement){
+    return JSON.parse(localStorage.getItem(emplacement));
 }
+// function FadeIn(element){
+//     element.style.display = block;
+//     let opacity = 0.1;
+//     let timer = setInterval(()=>{
+//         if(opacity >= 1){
+//             clearInterval(timer);
+//         }
+//         element.style.opacity = opacity;
+//         element.style.filter = "alpha(opacity=" + op*100 + ")";
+//         op += op*0.1
+//     }, 50);
+// }
+// function FadeOut(element){
+//     let opacity = 1;
+//     let timer = setInterval(()=>{
+//         if(opacity <= 0.1){
+//             clearInterval(timer);
+//             element.style.display = none;
+//         }
+//         element.style.opacity = opacity;
+//         element.style.filter = "alpha(opacity=" + op*100 + ")";
+//         op -= op*0.1
+//     }, 50);
+// }
 
 /* TODO
 changer le nombre d'articles du panier
@@ -242,3 +240,26 @@ Page d'accueil
 Ajouter nouveaux articles
 */
 
+if(readLocalStorage("spikyArticles") == null || readLocalStorage("spikyArticles") == ""){
+    addToLocalStorage(
+        {
+        category1 : [
+            new Product('Sac de baroudeur','./src/image01.jpg', 'description', 100, '120.00', 'Sacs'),
+            new Product("Sac Ado","./src/image02.jpg", "description", 101, "25.00", "Sacs"),
+            new Product("Sac Mode","./src/image03.jpg", "description", 102, "120.00", "Sacs")
+        ],
+        category2 : [
+            new Product("Valise 'Vernis à ongles'","./src/image04.jpg", "description", 200, "75.00", "Valises"),
+            new Product("Valise Vintage","./src/image05.jpg", "description", 201, "199.99", "Valises"),
+            new Product("Valise perdue","./src/image06.jpg", "description", 202, "1.00", "Valises")
+        ],
+        category3 : [
+            new Product("Cactus 'L'Original'","./src/image07.jpg", "description", 300, "150.00", "Cactus"),
+            new Product("Cactus 'Boule'","./src/image08.jpg", "description", 301, "12.00", "Cactus"),
+            new Product("Cactus de Tennis","./src/image09.jpg", "description", 302, "150.00", "Cactus")
+        ]
+    }, "spikyArticles")
+}
+if (readLocalStorage("cart") == null || readLocalStorage("cart") == ""){
+    addToLocalStorage([], "cart");
+}
