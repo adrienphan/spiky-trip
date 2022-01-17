@@ -101,6 +101,7 @@ nav ul {
     text-align: center;
     border-radius: 5px 5px 0 0;
     border: 1px solid #fff;
+    cursor: pointer;
 }
 .current {
     border-bottom: none;
@@ -112,6 +113,7 @@ nav ul {
     border: 1px solid #fff;
     border-bottom: none;
     border-radius: 5px 5px 0 0;
+    cursor: pointer;
 }
 #cartBtn img{
     width: 1.8rem;

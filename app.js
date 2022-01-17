@@ -198,48 +198,18 @@ function DeleteArticleFromCart(ref){
         cart.splice(cart.findIndex(element => element == productToDelete),1);
         DisplayCart();
 }
+//Add data to localStorage
 function addToLocalStorage(data, emplacement){
     let toAdd = JSON.stringify(data);
     localStorage.setItem(emplacement, toAdd);
 }
+//read LocalStorage
 function readLocalStorage(emplacement){
     return JSON.parse(localStorage.getItem(emplacement));
 }
-// function FadeIn(element){
-//     element.style.display = block;
-//     let opacity = 0.1;
-//     let timer = setInterval(()=>{
-//         if(opacity >= 1){
-//             clearInterval(timer);
-//         }
-//         element.style.opacity = opacity;
-//         element.style.filter = "alpha(opacity=" + op*100 + ")";
-//         op += op*0.1
-//     }, 50);
-// }
-// function FadeOut(element){
-//     let opacity = 1;
-//     let timer = setInterval(()=>{
-//         if(opacity <= 0.1){
-//             clearInterval(timer);
-//             element.style.display = none;
-//         }
-//         element.style.opacity = opacity;
-//         element.style.filter = "alpha(opacity=" + op*100 + ")";
-//         op -= op*0.1
-//     }, 50);
-// }
 
-/* TODO
-changer le nombre d'articles du panier
-Panier vide au démarrage
-Bonus
-Style des onglets de catégories
-Rendre le site beau
-Page d'accueil
-Ajouter nouveaux articles
-*/
 
+//Initialize localStorage for articles, if empty, will add articles to localStorage
 if(readLocalStorage("spikyArticles") == null || readLocalStorage("spikyArticles") == ""){
     addToLocalStorage(
         {
@@ -260,6 +230,7 @@ if(readLocalStorage("spikyArticles") == null || readLocalStorage("spikyArticles"
         ]
     }, "spikyArticles")
 }
+//Initialize "cart" localStorage to empty array if null or empty string
 if (readLocalStorage("cart") == null || readLocalStorage("cart") == ""){
     addToLocalStorage([], "cart");
 }
