@@ -7,6 +7,7 @@ class Product{
         this.reference = reference;
         this.price = price;
         this.category = category;
+        //html for each article's card
         this.articleCard = `<div class="article-card">
             <img class="article-image" src="${this.picture}" alt="${this.alt}">
             <div class="card-info">
@@ -14,12 +15,14 @@ class Product{
                     <div class="name">${this.name}</div>
                     <div class="price">${this.price} €</div>
                 </div>
+                <p class="article-description">${this.alt}</p>
                 <div class="ref-add">
                     <div class="ref">${this.reference}</div>
                     <button class="addButton" id="add-${this.reference}">Ajouter au panier</button>
                 </div>
             </div>
         </div>`;
+        //html for each article's entry in the cart
         this.cartCard = `<div class="cart-article">
             <p class="cart-article-delete" id="delete-${this.reference}">&times;</p>
             <p class="cart-article-name">${this.name}</p>
@@ -37,6 +40,7 @@ const productList = readLocalStorage("spikyArticles");
 //cart Array : contains objects {product : product, quantity : number of the product}
 let cart = readLocalStorage("cart");
 let total;
+
 /* |**************************|
    |         Elements         |
    |**************************| */
@@ -47,7 +51,7 @@ const cartButton = document.getElementById("cartBtn");
 const closeModalBtn = document.getElementById("closeModal");
 const cartArticles = document.getElementById("cart-articles");
 const totalElement = document.getElementById("total");
-// const addToCartBtn = document.querySelectorAll(".addButton")
+
 /* |**************************|
    |          Events          |
    |**************************| */
@@ -119,7 +123,8 @@ document.addEventListener("click", (e)=>{
         const refToDecrease = e.target.id.substring(9);
         DecreaseQuantity(refToDecrease);
     }
-})
+});
+
 /* |**************************|
    |        Functions         |
    |**************************| */
@@ -150,7 +155,7 @@ function AddToCart(itemReference){
         product : productList[itemCategory][itemReference.slice(2)],
         quantity : 1
     });
-    
+    addToLocalStorage(cart, "cart");
 }
 //Fill the Cart Modal with the necessary info
 function DisplayCart(){
@@ -176,18 +181,23 @@ function DisplayCart(){
     });
     addToLocalStorage(cart, "cart");
 }
+//Increase quantity of product with argument: ref in cart
 function IncreaseQuantity(ref){
     let productToIncrement = cart.find(obj => {
         return obj.product.reference == ref;
     });
     productToIncrement.quantity++;
+    if(productToIncrement.quantity <= 0) DeleteArticleFromCart(ref)
     DisplayCart();
 }
+//Decrease quantity of product with argument: ref in cart
+//and delete article if quantity reaches 0
 function DecreaseQuantity(ref){
     let productToDecrement = cart.find(obj => {
         return obj.product.reference == ref;
     });
     productToDecrement.quantity--;
+    if(productToDecrement.quantity <= 0) DeleteArticleFromCart(ref)
     DisplayCart();
 }
 //Deletes all units of an article from the cart
@@ -208,6 +218,9 @@ function readLocalStorage(emplacement){
     return JSON.parse(localStorage.getItem(emplacement));
 }
 
+/* |*******************************|
+   |        Initialisation         |
+   |*******************************| */
 
 //Initialize localStorage for articles, if empty, will add articles to localStorage
 if(readLocalStorage("spikyArticles") == null || readLocalStorage("spikyArticles") == ""){
@@ -224,9 +237,9 @@ if(readLocalStorage("spikyArticles") == null || readLocalStorage("spikyArticles"
             new Product("Valise perdue","./src/image06.jpg", "description", 202, "1.00", "Valises")
         ],
         category3 : [
-            new Product("Cactus 'L'Original'","./src/image07.jpg", "description", 300, "150.00", "Cactus"),
-            new Product("Cactus 'Boule'","./src/image08.jpg", "description", 301, "12.00", "Cactus"),
-            new Product("Cactus de Tennis","./src/image09.jpg", "description", 302, "150.00", "Cactus")
+            new Product("Cactus 'L'Original'","./src/image07.jpg", "Le cactus que tout le monde aime", 300, "150.00", "Cactus"),
+            new Product("Cactus 'Boule'","./src/image08.jpg", "Parfait pour un petit football", 301, "12.00", "Cactus"),
+            new Product("Cactus de Tennis","./src/image09.jpg", "Risque de garder la balle accrochée", 302, "150.00", "Cactus")
         ]
     }, "spikyArticles")
 }

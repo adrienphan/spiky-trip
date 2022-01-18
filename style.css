@@ -76,6 +76,30 @@ h1 {
     padding: 1rem;
     font-family: Arthead, 'Times New Roman', serif;
 }
+h1::before {
+    background-image: url("./src/cactus.png");
+    background-size: min(50px, 10vw);
+    display: inline-block;
+    width: min(50px, 10vw);
+    height: min(50px, 10vw);
+    content: "";
+    filter: invert(100%);
+    margin-inline: 2rem;
+}
+h1::after {
+    background-image: url("./src/cactus.png");
+    background-size: min(50px, 10vw);
+    display: inline-block;
+    width: min(50px, 10vw);
+    height: min(50px, 10vw);
+    content: "";
+    filter: invert(100%);
+    margin-inline: 2rem;
+}
+h2 {
+    font-size: min(3rem, 5vw);
+    margin-bottom: 3rem;
+}
 nav {
     width: min(800px, 80vw);
     margin-inline: auto;
@@ -93,6 +117,18 @@ nav ul {
     width: 100%;
     height: 1rem;
     background-color: #fff;
+}
+#welcome-cactus {
+    width: min(500px, 50vw);
+    border-radius: 50%;
+    padding: 6px;
+    border: 6px double #fff;
+    margin: 1rem;
+    transition: ease-in-out .1s;
+}
+#welcome-cactus:hover {
+    padding: 24px;
+    margin: calc(1rem - 18px);
 }
 .category {
     width: min(6rem, 20vw);
@@ -148,7 +184,7 @@ main{
 
 }
 .card-info {
-    height: 5rem;
+    height: 10rem;
     padding: .5rem;
     display: flex;
     flex-direction: column;
@@ -173,6 +209,7 @@ main{
     color: #8396C0;
     font-family: Arcane nine;
     cursor: pointer;
+    transition: .1s ease-in-out;
 }
 /* Modal Cart */
 #myCart {
@@ -200,7 +237,7 @@ main{
     font-size: 28px;
     font-weight: bold;
   }
-  h2 {
+  h3 {
       font-size: 2rem;
   }
   #closeModal:hover,
@@ -277,4 +314,14 @@ main{
     color: #8396C0;
     font-family: Arcane nine;
     cursor: pointer;
+  }
+  @media screen and (max-width: 550px) {
+      h1::before {
+          content: "";
+          background: none;
+      }
+      h1::after {
+        content: "";
+        background: none;
+    }
   }
